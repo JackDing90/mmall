@@ -14,6 +14,12 @@ public class Const {
     public interface ProductListOrderBy{
         Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_desc","price_asc");
     }
+    public interface Cart{
+        int CHECKED = 1;
+        int NOT_CHECKED = 0;
+        String STOCK_LIMIT_SUCCESS ="1";
+        String STOCK_LIMIT_FAIL ="0";
+    }
     public interface Role{
         int ROLE_CUSTOMER = 0;//普通用户
         int ROLE_ADMIN = 1;//管理员
