@@ -65,7 +65,7 @@ public class CategoryServiceImpl implements ICategoryService {
         if(CollectionUtils.isEmpty(categories)){
             return ServerResponse.createByErrorMessage("获取品类子节点失败");
         }
-        return ServerResponse.createBySucess(categories);
+        return ServerResponse.createBySuccess(categories);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class CategoryServiceImpl implements ICategoryService {
                 categoryIdList.add(categoryItem2.getId());
             }
         }
-        return ServerResponse.createBySucess(categoryIdList);
+        return ServerResponse.createBySuccess(categoryIdList);
     }
 
     //递归算法

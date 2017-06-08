@@ -19,4 +19,7 @@ public interface ShippingMapper {
     int updateByPrimaryKey(Shipping record);
 
     List<Shipping> selectByUserId(Integer userId);
+
+    Shipping selectByPrimaryKey2(@Param("shippingId") Integer shippingId);
+
 }

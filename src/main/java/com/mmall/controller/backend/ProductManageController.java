@@ -57,7 +57,7 @@ public class ProductManageController {
         if (user == null) {
             return ServerResponse.createByErrorMessage("用户未登录，请登录后重试");
         }else{
-            if (iUserService.checkAdminRole(user).isSucess()) {
+            if (iUserService.checkAdminRole(user).isSuccess()) {
                 return iProductService.saveOrUpdateProduct(product);
             } else {
                 return ServerResponse.createByErrorMessage("无管理员权限");
@@ -77,7 +77,7 @@ public class ProductManageController {
         if (user == null) {
             return ServerResponse.createByErrorMessage("用户未登录，请登录后重试");
         }else{
-            if (iUserService.checkAdminRole(user).isSucess()) {
+            if (iUserService.checkAdminRole(user).isSuccess()) {
                 return iProductService.setSaleStatus(productId,status);
             } else {
                 return ServerResponse.createByErrorMessage("无管理员权限");
@@ -98,7 +98,7 @@ public class ProductManageController {
         if (user == null) {
             return ServerResponse.createByErrorMessage("用户未登录，请登录后重试");
         }else{
-            if (iUserService.checkAdminRole(user).isSucess()) {
+            if (iUserService.checkAdminRole(user).isSuccess()) {
                 return iProductService.managerProductDetail(productId);
             } else {
                 return ServerResponse.createByErrorMessage("无管理员权限");
@@ -120,7 +120,7 @@ public class ProductManageController {
         if (user == null) {
             return ServerResponse.createByErrorMessage("用户未登录，请登录后重试");
         }else{
-            if (iUserService.checkAdminRole(user).isSucess()) {
+            if (iUserService.checkAdminRole(user).isSuccess()) {
                 return iProductService.getList(pageNum,pageSize);
             } else {
                 return ServerResponse.createByErrorMessage("无管理员权限");
@@ -138,7 +138,7 @@ public class ProductManageController {
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录后再试");
         }else{
-            if (iUserService.checkAdminRole(user).isSucess()) {
+            if (iUserService.checkAdminRole(user).isSuccess()) {
                 return iProductService.searchByNameAndProductId(productName,productId,pageNum,pageSize);
             } else {
                 return ServerResponse.createByErrorMessage("无管理员权限");
@@ -153,13 +153,13 @@ public class ProductManageController {
         if(user==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录后再试");
         }else{
-            if (iUserService.checkAdminRole(user).isSucess()) {
+            if (iUserService.checkAdminRole(user).isSuccess()) {
                 String realPath = request.getSession().getServletContext().getRealPath("upload");
                 Map map = iFileService.upload(multipartFile, realPath);
                 if(map == null){
                     return ServerResponse.createByErrorMessage("上传失败");
                 }
-                return ServerResponse.createBySucess(map);
+                return ServerResponse.createBySuccess(map);
             }else{
                 return ServerResponse.createByErrorMessage("无管理员权限");
             }
@@ -176,7 +176,7 @@ public class ProductManageController {
             resultMap.put("msg","请登录管理员");
             return resultMap;
         }else{
-            if (iUserService.checkAdminRole(user).isSucess()) {
+            if (iUserService.checkAdminRole(user).isSuccess()) {
                 String realPath = request.getSession().getServletContext().getRealPath("upload");
                 Map uploadMap = iFileService.upload(multipartFile, realPath);
                 if(uploadMap==null){

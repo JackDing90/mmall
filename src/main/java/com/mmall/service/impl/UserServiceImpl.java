@@ -42,11 +42,11 @@ public class UserServiceImpl implements IUserService {
     @Override
     public ServerResponse<String> register(User user) {
         ServerResponse<String> srUserName = this.checkValid(user.getUsername(), Const.USERNAME);
-        if (!srUserName.isSucess()) {
+        if (!srUserName.isSuccess()) {
             return srUserName;
         }
         ServerResponse<String> srEmail = this.checkValid(user.getEmail(), Const.EMAIL);
-        if (!srEmail.isSucess()) {
+        if (!srEmail.isSuccess()) {
             return srEmail;
         }
         user.setRole(Const.Role.ROLE_CUSTOMER);
@@ -82,7 +82,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public ServerResponse<String> selectQuestion(String username) {
         ServerResponse<String> validResponse = this.checkValid(username, Const.USERNAME);
-        if (validResponse.isSucess()) {
+        if (validResponse.isSuccess()) {
             return ServerResponse.createByErrorMessage("用户不存在");
         }
         String question = userMapper.selectQuestion(username);
@@ -98,7 +98,7 @@ public class UserServiceImpl implements IUserService {
         if (answerQuestion > 0) {
             String forgetToken = UUID.randomUUID().toString();
             TokenCache.setKey("token_" + username, forgetToken);
-            return ServerResponse.createBySucess(forgetToken);
+            return ServerResponse.createBySuccess(forgetToken);
         }
         return ServerResponse.createByErrorMessage("密保问题验证失败");
     }
@@ -106,7 +106,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public ServerResponse<String> forgetResetPassword(String username, String passwordNew, String forgetToken) {
         ServerResponse<String> validResponse = this.checkValid(username, Const.USERNAME);
-        if (validResponse.isSucess()) {
+        if (validResponse.isSuccess()) {
             return ServerResponse.createByErrorMessage("用户不存在");
         }
         if (StringUtils.isBlank(forgetToken)) {
@@ -120,7 +120,7 @@ public class UserServiceImpl implements IUserService {
             String md5Password = MD5Util.MD5EncodeUtf8(passwordNew);
             int count = userMapper.updatePasswordByUsername(username, md5Password);
             if(count>0){
-                return ServerResponse.createBySucess("重置密码成功 ");
+                return ServerResponse.createBySuccess("重置密码成功 ");
             }
         }
         return ServerResponse.createByErrorMessage("重置密码失败");
@@ -136,7 +136,7 @@ public class UserServiceImpl implements IUserService {
         user.setPassword(MD5Util.MD5EncodeUtf8(passwordNew));
         int newCount = userMapper.updateByPrimaryKeySelective(user);
         if(newCount==1){
-            return ServerResponse.createBySucess("重置密码成功");
+            return ServerResponse.createBySuccess("重置密码成功");
         }
         return ServerResponse.createByErrorMessage("重置密码失败");
     }
@@ -167,7 +167,7 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createByErrorMessage("找不到当前用户");
         }
         user.setPassword(StringUtils.EMPTY);
-        return ServerResponse.createBySucess(user);
+        return ServerResponse.createBySuccess(user);
     }
 
     @Override

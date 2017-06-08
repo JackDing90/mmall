@@ -42,7 +42,7 @@ public class CategoryManageController {
         if(user==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"请登录后再重试");
         }
-        if(iUserService.checkAdminRole(user).isSucess()) {
+        if(iUserService.checkAdminRole(user).isSuccess()) {
             return iCategoryService.addCategory(categoryName, parentId);
         }
             return ServerResponse.createByErrorMessage("无管理员权限");
@@ -62,7 +62,7 @@ public class CategoryManageController {
         if(user==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"请登录后再重试");
         }
-        if(iUserService.checkAdminRole(user).isSucess()) {
+        if(iUserService.checkAdminRole(user).isSuccess()) {
             return iCategoryService.updateCategoryName(categoryId,categoryName);
         }
         return ServerResponse.createByErrorMessage("无管理员权限");
@@ -81,7 +81,7 @@ public class CategoryManageController {
         if(user==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"请登录后再重试");
         }
-        if(iUserService.checkAdminRole(user).isSucess()) {
+        if(iUserService.checkAdminRole(user).isSuccess()) {
             return iCategoryService.getChildrenParallelCategory(categoryId);
         }
         return ServerResponse.createByErrorMessage("无管理员权限");
@@ -100,7 +100,7 @@ public class CategoryManageController {
         if(user==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"请登录后再重试");
         }
-        if(iUserService.checkAdminRole(user).isSucess()) {
+        if(iUserService.checkAdminRole(user).isSuccess()) {
             return iCategoryService.selectCategoryAndChildrenById(categoryId);
         }
         return ServerResponse.createByErrorMessage("无管理员权限");

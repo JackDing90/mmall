@@ -91,7 +91,7 @@ public class CartServiceImpl implements ICartService {
 
     @Override
     public ServerResponse<CartVo> checkUnSelectStatus(Integer userIdFromSession,Integer productId){
-        int unSelectCount = cartMapper.updateCheckSelectOrUnselct(userIdFromSession, Const.Cart.NOT_CHECKED, productId);
+        int unSelectCount = cartMapper.updateCheckSelectOrUnselct(userIdFromSession, Const.Cart.UN_CHECKED, productId);
         if(unSelectCount>0){
             return this.list(userIdFromSession);
         }else{
@@ -102,14 +102,14 @@ public class CartServiceImpl implements ICartService {
     @Override
     public ServerResponse<Integer> getCartProductCount(Integer userIdFromSession){
         Integer sum = cartMapper.getCartProductCount(userIdFromSession);
-        return ServerResponse.createBySucess(sum);
+        return ServerResponse.createBySuccess(sum);
     }
 
 
     @Override
     public ServerResponse<CartVo> list(Integer userId){
         CartVo cartVoLimit = this.getCartVoLimit(userId);
-        return ServerResponse.createBySucess(cartVoLimit);
+        return ServerResponse.createBySuccess(cartVoLimit);
     }
 
 
@@ -144,10 +144,10 @@ public class CartServiceImpl implements ICartService {
                     int stockLimit = 0;
                     if(product.getStock()>=cartItem.getQuantity()){//商品的总库存大于等于购物车中的需要的数量时
                         stockLimit = cartItem.getQuantity();
-                        cartProductVo.setLimitQuantity(Const.Cart.STOCK_LIMIT_SUCCESS);
+                        cartProductVo.setLimitQuantity(Const.Cart.LIMIT_NUM_SUCCESS);
                     }else{
                         stockLimit = product.getStock();
-                        cartProductVo.setLimitQuantity(Const.Cart.STOCK_LIMIT_FAIL);
+                        cartProductVo.setLimitQuantity(Const.Cart.LIMIT_NUM_FAIL);
                         Cart cartForQuantity = new Cart();
                         cartForQuantity.setId(product.getId());
                         cartForQuantity.setQuantity(stockLimit);

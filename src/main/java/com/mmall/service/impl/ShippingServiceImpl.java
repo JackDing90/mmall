@@ -24,7 +24,7 @@ public class ShippingServiceImpl implements IShippingService {
         shipping.setUserId(userId);
         int insert = shippingMapper.insert(shipping);
         if(insert>0){
-            return ServerResponse.createBySucess(shipping.getId());
+            return ServerResponse.createBySuccess(shipping.getId());
         }
         return ServerResponse.createByErrorMessage("收货地址插入失败");
     }
@@ -33,7 +33,7 @@ public class ShippingServiceImpl implements IShippingService {
     public ServerResponse<String> del(Integer userId,Integer id) {
         int deleteCount = shippingMapper.deleteByPrimaryKey(userId,id);
         if(deleteCount>0){
-            return ServerResponse.createBySucess("删除成功");
+            return ServerResponse.createBySuccess("删除成功");
         }
         return ServerResponse.createByErrorMessage("删除失败");
     }
@@ -44,7 +44,7 @@ public class ShippingServiceImpl implements IShippingService {
         shipping.setUserId(id);
         int count = shippingMapper.updateByPrimaryKey(shipping);
         if(count>0){
-            return ServerResponse.createBySucess("更新成功");
+            return ServerResponse.createBySuccess("更新成功");
         }
         return ServerResponse.createByErrorMessage("更新失败");
     }
@@ -53,7 +53,7 @@ public class ShippingServiceImpl implements IShippingService {
     public ServerResponse<Shipping> select(Integer userId, Integer id) {
         Shipping sh  = shippingMapper.selectByPrimaryKey(userId,id);
         if(sh != null){
-            return ServerResponse.createBySucess(sh);
+            return ServerResponse.createBySuccess(sh);
         }
         return ServerResponse.createByErrorMessage("查询失败");
     }
@@ -64,7 +64,7 @@ public class ShippingServiceImpl implements IShippingService {
         List<Shipping> shippingList = shippingMapper.selectByUserId(id);
         PageInfo pageInfo = new PageInfo(shippingList);
         pageInfo.setList(shippingList);
-        return ServerResponse.createBySucess(pageInfo);
+        return ServerResponse.createBySuccess(pageInfo);
     }
 
 }

@@ -87,7 +87,7 @@ public class ProductServiceImpl implements IProductService {
             return ServerResponse.createByErrorMessage("产品己下架或者已经删除");
         }
         ProductDetailVo detailVo = assembleProductDetailVO(product);
-        return ServerResponse.createBySucess(detailVo);
+        return ServerResponse.createBySuccess(detailVo);
     }
 
     private ProductDetailVo assembleProductDetailVO(Product product){
@@ -124,7 +124,7 @@ public class ProductServiceImpl implements IProductService {
         PageInfo pageinfo = new PageInfo(products);
         List<ProductListVo> productListVos = assembleProductListVO(products);
         pageinfo.setList(productListVos);
-        return ServerResponse.createBySucess(pageinfo);
+        return ServerResponse.createBySuccess(pageinfo);
     }
 
     private List<ProductListVo> assembleProductListVO(List<Product> products){
@@ -157,7 +157,7 @@ public class ProductServiceImpl implements IProductService {
         PageInfo pageinfo = new PageInfo(products);
         List<ProductListVo> productListVos = assembleProductListVO(products);
         pageinfo.setList(productListVos);
-        return ServerResponse.createBySucess(pageinfo);
+        return ServerResponse.createBySuccess(pageinfo);
     }
 
     @Override
@@ -168,7 +168,7 @@ public class ProductServiceImpl implements IProductService {
         }else{
             if(product.getStatus()== Const.ProductStatusEnum.ON_SALE.getCode()){
                 ProductDetailVo productDetailVo = assembleProductDetailVO(product);
-                return ServerResponse.createBySucess(productDetailVo);
+                return ServerResponse.createBySuccess(productDetailVo);
             }else{
                 return ServerResponse.createByErrorMessage("商品不在销售状态");
             }
@@ -187,7 +187,7 @@ public class ProductServiceImpl implements IProductService {
                 Category category = categoryMapper.selectByPrimaryKey(categoryId);
                 if(category==null){
                     //返回一个空的pageInfo到前台，不报错
-                    return ServerResponse.createBySucess(pageInfo);
+                    return ServerResponse.createBySuccess(pageInfo);
                 }else{
                     PageHelper.startPage(pageNum,pageSize);
                     //查询分类子目录
@@ -203,7 +203,7 @@ public class ProductServiceImpl implements IProductService {
                     List<Product> productList = productMapper.getProductNameAndCategoryId(productName, categoryIdList);
                     List<ProductListVo> productListVos = assembleProductListVO(productList);
                     pageInfo.setList(productListVos);
-                    return ServerResponse.createBySucess(pageInfo);
+                    return ServerResponse.createBySuccess(pageInfo);
                 }
             }
             return ServerResponse.createByErrorMessage("查询失败");

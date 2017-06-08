@@ -34,7 +34,7 @@ public class UserController {
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session){
         ServerResponse response = iUserService.login(username,password);
-        if(response.isSucess()){
+        if(response.isSuccess()){
             session.setAttribute(Const.CURRENT_USER,response.getData());
         }
          return response;
@@ -85,7 +85,7 @@ public class UserController {
     public  ServerResponse<User> getUserInfo(HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user!=null){
-            return ServerResponse.createBySucess(user);
+            return ServerResponse.createBySuccess(user);
         }
         return ServerResponse.createByErrorMessage("用户未登录，请登录后再试");
     }
@@ -159,7 +159,7 @@ public class UserController {
         }
         user.setId(cuurUser.getId());
         ServerResponse<User> userServerResponse = iUserService.updateInformation(user);
-        if(userServerResponse.isSucess()){
+        if(userServerResponse.isSuccess()){
             session.setAttribute(Const.CURRENT_USER,userServerResponse.getData());
         }
         return userServerResponse;
